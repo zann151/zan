@@ -1,16 +1,21 @@
 import java.util.Scanner;
 
-public class H7b
+public class UmpaH7b
 {
     public static void main (String[]args)
     {
+        
+    // adding scanner and settings up variables
+        
         Scanner s = new Scanner(System.in);
         int x ;
         int y ;
         int z ;
         double n ;
         double m ;
-
+    
+    //  printing out and asking the user for inputs 
+        
         System.out.print("Please input the value of x = ");
         x = s.nextInt();
         System.out.print("Please input the value of y = ");
@@ -21,17 +26,23 @@ public class H7b
         n = s.nextDouble();
         System.out.print("Please input the value of m = ");
         m = s.nextDouble();
-
+    
+    //  printing the said user inputs and declaring them in the variables
+        
         System.out.println("x = "+ x);
         System.out.println("y = "+ y);
         System.out.println("z = "+ z);
         System.out.println("n = "+ n);
         System.out.println("m = "+ m);
 
+    //  settings up the sum, product, average, and the total of all operations in a variable
+        
         int sum = x + y;
         int average = (x+y+z) / 3 ;
         double product = n * m ;
         double total = sum + average + product ;
+
+    // printing out the values of the sum, values of the average, values of the product, and values of the total operations
 
         System.out.println("The sum of x and y is: " + sum);
         System.out.println("The average of x,y,and z is: " + average);
