@@ -1,0 +1,39 @@
+import javax.swing.*;
+
+public class H7c
+{
+    public static void main (String[]args) {
+        String item1 = "";
+        item1 = JOptionPane.showInputDialog("Please Enter the first item name: " + item1);
+
+        String x;
+        x = JOptionPane.showInputDialog("Input Count of " + item1);
+        int xint = Integer.parseInt(x);
+
+        JOptionPane.showMessageDialog(null,"The count of "+item1 +" is " + xint);
+
+        String item2 = "";
+        item2 = JOptionPane.showInputDialog("Please Enter the second item name: " + item2);
+
+        String y;
+        y = JOptionPane.showInputDialog("Input Count of " + item2);
+        int yint = Integer.parseInt(y);
+
+        JOptionPane.showMessageDialog(null,"The count of "+item2 +" is " + yint);
+
+        String item3 = "";
+        item3 = JOptionPane.showInputDialog("Please Enter the third item name: " + item3);
+
+        String z;
+        z = JOptionPane.showInputDialog("Input Count of " + item3);
+        int zint = Integer.parseInt(z);
+
+
+        JOptionPane.showMessageDialog(null,"The count of "+item3 +" is " + zint);
+
+        int sum = xint + yint + zint;
+
+        JOptionPane.showMessageDialog(null,"Adding the values for "+item1+" = "+xint+", "+item2+" = "+yint+" and "+item3+" = "+zint+". Their sum is = "+sum);
+
+    }
+}
