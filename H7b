@@ -1,0 +1,42 @@
+import java.util.Scanner;
+
+public class H7b
+{
+    public static void main (String[]args)
+    {
+        Scanner s = new Scanner(System.in);
+        int x ;
+        int y ;
+        int z ;
+        double n ;
+        double m ;
+
+        System.out.print("Please input the value of x = ");
+        x = s.nextInt();
+        System.out.print("Please input the value of y = ");
+        y = s.nextInt();
+        System.out.print("Please input the value of z = ");
+        z = s.nextInt();
+        System.out.print("Please input the value of n = ");
+        n = s.nextDouble();
+        System.out.print("Please input the value of m = ");
+        m = s.nextDouble();
+
+        System.out.println("x = "+ x);
+        System.out.println("y = "+ y);
+        System.out.println("z = "+ z);
+        System.out.println("n = "+ n);
+        System.out.println("m = "+ m);
+
+        int sum = x + y;
+        int average = (x+y+z) / 3 ;
+        double product = n * m ;
+        double total = sum + average + product ;
+
+        System.out.println("The sum of x and y is: " + sum);
+        System.out.println("The average of x,y,and z is: " + average);
+        System.out.println("The product of n and m is: " + product);
+        System.out.println("The grand total of all the operations done is " + total);
+
+    }
+}
