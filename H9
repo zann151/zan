@@ -1,0 +1,66 @@
+import java.util.*;
+public class H9
+{
+    public static void main (String[]args)
+    {
+        
+        System.out.println("Please input a decimal number that is up to three digits: ");
+        
+        //making a scanner for user inpur
+        Scanner in = new Scanner(System.in);
+        
+        //assigning user input to input variable
+        int input;
+        
+        //scanning the user input to be stored in input variable
+        input = in.nextInt();
+        
+        System.out.println("The binary equivalent of " +input + " is ");
+        
+        
+        //user input value is being divided and get the modulus 10 times and stored on each integer datatype 
+        int firstdiv = (input / 2) ;
+        int firstmodulus = (input % 2) ;
+        
+        int seconddiv = (firstdiv / 2) ;
+        int secondmodulus = (firstdiv % 2) ;
+        
+        int thirddiv = (seconddiv / 2);
+        int thirdmodulus = (seconddiv % 2) ;
+        
+        int fourthdiv = (thirddiv / 2) ;
+        int fourthmodulus = (thirddiv % 2) ;
+        
+        int fifthdiv = (fourthdiv / 2) ;
+        int fifthmodulus = (fourthdiv % 2) ;
+        
+        int sixthdiv = (fifthdiv / 2) ;
+        int sixthmodulus = (fifthdiv % 2) ;
+        
+        int seventhdiv = (sixthdiv / 2) ;
+        int seventhmodulus = (sixthdiv % 2) ;
+        
+        int eightdiv = (seventhdiv / 2) ;
+        int eightmodulus = (seventhdiv % 2) ;
+        
+        int ninthdiv = (eightdiv / 2) ;
+        int ninthmodulus = (eightdiv % 2) ;
+        
+        int tenthdiv = (ninthdiv / 2) ;
+        int tenthmodulus = (ninthdiv % 2) ;
+        
+        /* printing the 10 modulus of each integer datatype that is being stored on the first 10 integer division on a reverse manner
+        to get the binary equivalent of the user input three digits decimal number */
+        System.out.print(tenthmodulus);
+        System.out.print(ninthmodulus);
+        System.out.print(eightmodulus);
+        System.out.print(seventhmodulus);
+        System.out.print(sixthmodulus);
+        System.out.print(fifthmodulus);
+        System.out.print(fourthmodulus);
+        System.out.print(thirdmodulus);
+        System.out.print(secondmodulus);
+        System.out.print(firstmodulus);
+        
+    }
+}
