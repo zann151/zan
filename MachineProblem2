@@ -1,0 +1,175 @@
+import java.util.Arrays;
+import java.util.Random;
+import java.util.Scanner;
+public class MachineProblem2 {
+    public static void main(String[] args) {
+        int[] numbers = new int[10];
+        Random num = new Random();
+        for (int i = 0; i < numbers.length; i++) {
+            numbers[i] = num.nextInt(10);
+        }
+
+        Numbers nums = new Numbers(numbers);
+
+        boolean option = false;
+        while (!option) {
+            Scanner s = new Scanner(System.in);
+            System.out.println("Please choose an option below: ");
+            System.out.println("1. Display Even Numbers");
+            System.out.println("2. Display Odd Numbers");
+            System.out.println("3. Display the Sum of Even Numbers");
+            System.out.println("4. Display the Sum of Odd Numbers");
+            System.out.println("5. Display the sum of all Numbers");
+            System.out.println("6. Display the biggest number");
+            System.out.println("7. Display the smallest numbers");
+            System.out.println("8. Display the numbers in increasing order");
+            System.out.println("9. Display the numbers in decreasing order");
+            System.out.println("10. Display all options");
+            int choose = s.nextInt();
+
+            switch (choose) {
+                case 1:
+                    nums.displayEven();
+                    System.out.println();
+                    break;
+                case 2:
+                    nums.displayOdd();
+                    System.out.println();
+                    break;
+                case 3:
+                    System.out.println("The sum of even numbers is: " + nums.sumEven());
+                    break;
+                case 4:
+                    System.out.println("The sum of odd numbers is: " + nums.sumOdd());
+                    break;
+                case 5:
+                    System.out.println("The sum of all numbers is: " + nums.sumAll());
+                    break;
+                case 6:
+                    System.out.println("Biggest number is " + nums.biggestnum());
+                    break;
+                case 7:
+
+                    System.out.println("Smallest number is " + nums.smallestnum());
+                    break;
+                case 8:
+                    nums.ascending();
+                    break;
+                case 9:
+                    nums.descending();
+                    break;
+                case 10:
+                    nums.Options();
+                    break;
+                default:
+                    System.out.println("Invalid Option");
+            }
+            System.out.println("Do you want to try again? (Y/N)");
+            String choice = s.next().toUpperCase();
+            option = choice.equals("N");
+        }
+    }
+}
+    class Numbers {
+        public int[] numbers;
+        public Numbers(int[] numbers)
+        {
+            this.numbers = numbers;
+        }
+        public void displayEven() {
+            for (int number : numbers) {
+                if (number % 2 == 0) {
+                    System.out.print(number + " ");
+                }
+            }
+        }
+        public void displayOdd() {
+            for (int number : numbers) {
+                if (number % 2 != 0) {
+                    System.out.print(number + " ");
+                }
+            }
+        }
+        public int sumEven() {
+            int sum = 0;
+            for (int number : numbers) {
+                if (number % 2 == 0) {
+                    sum += number;
+                }
+            }
+            return sum;
+        }
+        public int sumOdd() {
+            int sum = 0;
+            for (int number : numbers) {
+                if (number % 2 != 0) {
+                    sum += number;
+                }
+            }
+            return sum;
+        }
+        public int sumAll() {
+            int sum = 0;
+            for (int number : numbers) {
+                sum += number;
+            }
+            return sum;
+        }
+        public int biggestnum()
+        {
+            int biggest = numbers[0];
+            for (int i = 1; i < numbers.length; i++) {
+                if (numbers[i] > biggest) {
+                    biggest = numbers[i];
+                }
+            }
+            return biggest;
+        }
+        public int smallestnum()
+        {
+            int smallest = numbers[0];
+            for (int i = 1; i < numbers.length; i++) {
+                if (numbers[i] < smallest) {
+                    smallest = numbers[i];
+                }
+            }
+            return smallest;
+        }
+        public void ascending()
+        {
+            Arrays.sort(numbers);
+            System.out.println("Numbers in ascending order:");
+            for (int i = 0; i < numbers.length; i++) {
+                System.out.print(numbers[i] + " ");
+            }
+            System.out.println();
+        }
+        public void descending()
+        {
+            Arrays.sort(numbers);
+            System.out.println("Numbers in decreasing order: ");
+            for (int i = numbers.length - 1; i >= 0; i--) {
+                System.out.print(numbers[i] + " ");
+            }
+            System.out.println();
+        }
+        public void Options()
+        {
+            System.out.println("This is all the options: ");
+            System.out.println("1. Display Even Numbers");
+            System.out.println("2. Display Odd Numbers");
+            System.out.println("3. Display the Sum of Even Numbers");
+            System.out.println("4. Display the Sum of Odd Numbers");
+            System.out.println("5. Display the sum of all Numbers");
+            System.out.println("6. Display the biggest number");
+            System.out.println("7. Display the smallest numbers");
+            System.out.println("8. Display the numbers in increasing order");
+            System.out.println("9. Display the numbers in decreasing order");
+            System.out.println("10. Display all options");
+        }
+}
+
+
+
+
+
