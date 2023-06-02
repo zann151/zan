@@ -1,0 +1,135 @@
+#include <stdio.h>
+
+#include <stdlib.h>
+
+#define MAX_SIZE 10
+
+
+
+void populateSquare(int *square, int size) {
+
+    printf("Enter the elements of the square:\n");
+
+    for (int i = 0; i < size; i++) {
+
+        for (int j = 0; j < size; j++) {
+
+            scanf("%d", square + i * size + j);
+
+        }
+
+    }
+
+}
+
+
+
+int isMagicSquare(int *square, int size) {
+
+    // Calculate the sum of the first row
+
+    int sum = 0;
+
+    for (int j = 0; j < size; j++) {
+
+        sum += *(square + j);
+
+    }
+
+    
+
+    for (int i = 1; i < size; i++) {
+
+        int rowSum = 0;
+
+        for (int j = 0; j < size; j++) {
+
+            rowSum += *(square + i * size + j);
+
+        }
+
+        if (rowSum != sum) {
+
+            return 0;
+
+        }
+
+    }
+
+   
+
+    for (int j = 0; j < size; j++) {
+
+        int colSum = 0;
+
+        for (int i = 0; i < size; i++) {
+
+            colSum += *(square + i * size + j);
+
+        }
+
+        if (colSum != sum) {
+
+            return 0;
+
+        }
+
+    }
+
+    
+
+    int diagSum1 = 0;
+
+    int diagSum2 = 0;
+
+    for (int i = 0; i < size; i++) {
+
+        diagSum1 += *(square + i * size + i);
+
+        diagSum2 += *(square + i * size + (size - i - 1));
+
+    }
+
+    if (diagSum1 != sum || diagSum2 != sum) {
+
+        return 0;
+
+    }
+
+    return 1;
+
+}
+
+int main() {
+
+    int size;
+
+    printf("Enter the size of the square (maximum %d): ", MAX_SIZE);
+
+    scanf("%d", &size);
+
+    if (size < 1 || size > MAX_SIZE) {
+
+        printf("Invalid size! Please enter a size between 1 and %d.\n", MAX_SIZE);
+
+        return 1;
+
+    }
+
+    int square[MAX_SIZE][MAX_SIZE];
+
+    populateSquare(&square[0][0], size);
+
+    if (isMagicSquare(&square[0][0], size)) {
+
+        printf("The given square is a magic square.\n");
+
+    } else {
+
+        printf("The given square is not a magic square.\n");
+
+    }
+
+    return 0;
+
+}
