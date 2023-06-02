@@ -1,0 +1,103 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+void generate_random_password(int length);
+
+int main() {
+    int length;
+    char include_upper, include_lower, include_numbers, include_special;
+
+    printf("Enter the length of the password (8-20): ");
+    scanf("%d", &length);
+
+    if (length < 8 || length > 20) {
+        printf("Invalid password length. Password length should be between 8 and 20 characters.\n");
+        return 0;
+    }
+
+    printf("Include uppercase letters? (y/n): ");
+    scanf(" %c", &include_upper);
+
+    printf("Include lowercase letters? (y/n): ");
+    scanf(" %c", &include_lower);
+
+    printf("Include numbers? (y/n): ");
+    scanf(" %c", &include_numbers);
+
+    printf("Include special characters? (y/n): ");
+    scanf(" %c", &include_special);
+
+    if (include_upper != 'y' && include_lower != 'y' && include_numbers != 'y' && include_special != 'y') {
+        printf("At least one type of character should be selected.\n");
+        return 0;
+    }
+
+    srand(time(NULL));
+    generate_random_password(length);
+
+    return 0;
+}
+
+void generate_random_password(int length) {
+    char password[length + 1];
+    int i, num_types = 0;
+
+    const char upper_letters[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const char lower_letters[] = "abcdefghijklmnopqrstuvwxyz";
+    const char numbers[] = "0123456789";
+    const char special_chars[] = "!@#$%^&*()-_+={}[]<>?";
+
+    const int num_upper = sizeof(upper_letters) - 1;
+    const int num_lower = sizeof(lower_letters) - 1;
+    const int num_numbers = sizeof(numbers) - 1;
+    const int num_special = sizeof(special_chars) - 1;
+
+    if (length < 8 || length > 20) {
+        printf("Invalid password length. Password length should be between 8 and 20 characters.\n");
+        return;
+    }
+
+    char include_upper, include_lower, include_numbers, include_special;
+
+    printf("Include uppercase letters? (y/n): ");
+    scanf(" %c", &include_upper);
+    if (include_upper == 'y') num_types++;
+
+    printf("Include lowercase letters? (y/n): ");
+    scanf(" %c", &include_lower);
+    if (include_lower == 'y') num_types++;
+
+    printf("Include numbers? (y/n): ");
+    scanf(" %c", &include_numbers);
+    if (include_numbers == 'y') num_types++;
+
+    printf("Include special characters? (y/n): ");
+    scanf(" %c", &include_special);
+    if (include_special == 'y') num_types++;
+
+    if (num_types == 0) {
+        printf("At least one type of character should be selected.\n");
+        return;
+    }
+
+    for (i = 0; i < length; i++) {
+        int type = rand() % num_types;
+
+        if (include_upper == 'y' && type == 0) {
+            password[i] = upper_letters[rand() % num_upper];
+        } else if (include_lower == 'y' && type == 1) {
+            password[i] = lower_letters[rand() % num_lower];
+        } else if (include_numbers == 'y' && type == 2) {
+            password[i] = numbers[rand() % num_numbers];
+        } else if (include_special == 'y' && type == 3) {
+            password[i] = special_chars[rand() % num_special];
+        } else {
+            i--;
+        }
+    }
+
+    password[length] = '\0';
+
+    printf("\nGenerated password: %s\n", password);
+}
