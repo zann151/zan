@@ -1,0 +1,43 @@
+import javax.swing.*;
+import java.awt.*;
+public class test1
+{
+    public static void main (String []args)
+    {
+        JFrame frame = new JFrame("Sample");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setResizable(false);
+        
+        JPanel panel = new JPanel();
+        
+        JLabel firstnum = new JLabel("First Number:");
+        JTextField firstnumfield = new JTextField(20);
+        
+        JLabel secondnum = new JLabel("Second Number:");
+        JTextField secondnumfield = new JTextField(20);
+        
+        JLabel result = new JLabel("Result");
+        JtextField resultfield = new JTextField(20);
+        
+        JButton addbutton = new JButton("Add");
+        JPanel addbuttonpanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        
+        JButton clearbutton = new JButton("Clear");
+        JPanel clearbuttonpanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        
+        panel.add(firstnum);
+        panel.add(firstnumfield);
+        panel.add(secondnum);
+        panel.add(secondnumfield);
+        panel.add(result);
+        panel.add(resultfield);
+        panel.add(addbutton);
+        panel.add(clearbutton);
+    
+        panel.setBorder(BorderFactory.createTitledBorder("Addition"));
+        frame.getContentPane().add(panel);
+        frame.setSize(500,350);
+        frame.setVisible(true);
+        
+    }
+}
