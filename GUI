@@ -1,0 +1,89 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+
+public class Main extends JFrame {
+    private JTextField firstNumberField;
+    private JTextField secondNumberField;
+    private JTextField resultLabel;
+
+    public Main() {
+        setTitle("Add Numbers");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(400, 250);
+        setLocationRelativeTo(null);
+
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new FlowLayout());
+
+        JLabel firstNumberLabel = new JLabel("First Number:");
+        firstNumberField = new JTextField(10);
+        firstNumberField.setBounds(10,80,80,25);
+        panel.add(firstNumberLabel);
+        panel.add(firstNumberField);
+
+        JLabel secondNumberLabel = new JLabel("Second Number:");
+        secondNumberField = new JTextField(10);
+        secondNumberField.setBounds(10,80,80,25);
+        panel.add(secondNumberLabel);
+        panel.add(secondNumberField);
+
+        JButton addButton = new JButton("Add");
+        addButton.addActionListener(new AddButtonListener());
+        addButton.setBounds(10,80,80,25);
+        panel.add(addButton);
+
+        JButton clearButton = new JButton("Clear");
+        clearButton.addActionListener(new ClearButtonListener());
+        clearButton.setBounds(10,80,80,25);
+        panel.add(clearButton);
+
+        JLabel resultTextLabel = new JLabel("Result:");
+        resultLabel = new JTextField(10);
+        resultLabel.setBounds(10,80,80,25);
+        panel.add(resultTextLabel);
+        panel.add(resultLabel);
+
+        // Add components to the panel
+
+
+        panel.setBorder(BorderFactory.createTitledBorder("Addition"));
+
+        // Set panel as the content pane
+        setContentPane(panel);
+        setVisible(true);
+    }
+
+    private class AddButtonListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            try {
+                int firstNumber = Integer.parseInt(firstNumberField.getText());
+                int secondNumber = Integer.parseInt(secondNumberField.getText());
+                int sum = firstNumber + secondNumber;
+                resultLabel.setText(Integer.toString(sum));
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(Main.this, "Invalid input. Please enter integers only.",
+                        "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+
+    private class ClearButtonListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            firstNumberField.setText("");
+            secondNumberField.setText("");
+            resultLabel.setText("");
+        }
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                new Main();
+            }
+        });
+    }
+}
