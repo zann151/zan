@@ -1,0 +1,292 @@
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
+
+public class MobileNumberRegistrationGUI extends JFrame {
+    private JTextField firstNameField;
+    private JTextField lastNameField;
+    private JTextField mobileNumberField;
+    private JButton addButton;
+    private JButton editButton;
+    private JButton deleteButton;
+    private JButton saveButton;
+    private JButton clearButton;
+    private JTable dataTable;
+    private DefaultTableModel tableModel;
+
+    private int selectedRow = -1; // Track the selected row index
+
+    public MobileNumberRegistrationGUI() {
+        setTitle("Mobile Number Registration");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new GridBagLayout());
+        setResizable(false); // Disable resizing
+
+        int frameWidth = 620;
+        int frameHeight = 422;
+        setSize(frameWidth, frameHeight);
+
+        int inputPanelWidth = 386;
+        int inputPanelHeight = 194;
+        int buttonPanelWidth = 158;
+        int buttonPanelHeight = 194;
+        int tablePanelWidth = 568;
+        int tablePanelHeight = 140;
+
+        JPanel inputPanel = new JPanel(new GridBagLayout());
+        JPanel buttonPanel = new JPanel(new GridBagLayout());
+        JPanel tablePanel = new JPanel(new BorderLayout());
+
+        // Create inner external thin outline border with black color for the input panel
+        int thickness = 1;
+        Color color = Color.BLACK;
+        inputPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        inputPanel.setBorder(BorderFactory.createLineBorder(color, thickness));
+
+        // Create titled border for the input panel
+        TitledBorder inputBorder = BorderFactory.createTitledBorder(
+                BorderFactory.createLineBorder(Color.BLACK, 1),
+                "Register Here",
+                TitledBorder.DEFAULT_JUSTIFICATION,
+                TitledBorder.DEFAULT_POSITION,
+                new Font("Arial", Font.PLAIN, 11),
+                Color.BLACK
+        );
+        inputPanel.setBorder(BorderFactory.createCompoundBorder(
+                inputBorder,
+                BorderFactory.createEmptyBorder(5, 5, 5, 5)
+        ));
+
+        // Create outer outline border with black color for the button panel
+        buttonPanel.setBorder(BorderFactory.createLineBorder(color, thickness));
+
+        // Input fields
+        JLabel firstNameLabel = new JLabel("      First Name:");
+        JLabel lastNameLabel = new JLabel("      Last Name:");
+        JLabel mobileNumberLabel = new JLabel("Mobile Number:");
+        firstNameField = new JTextField(11);
+        lastNameField = new JTextField(11);
+        mobileNumberField = new JTextField(11);
+        Font labelFont = new Font("Arial", Font.PLAIN, 11);
+
+        firstNameLabel.setFont(labelFont);
+        lastNameLabel.setFont(labelFont);
+        mobileNumberLabel.setFont(labelFont);
+
+        GridBagConstraints gbcInput = new GridBagConstraints();
+        gbcInput.anchor = GridBagConstraints.WEST;
+        gbcInput.fill = GridBagConstraints.HORIZONTAL;
+        gbcInput.gridx = 0;
+        gbcInput.gridy = 0;
+        gbcInput.insets = new Insets(5, 5, 5, 5);
+
+        inputPanel.add(firstNameLabel, gbcInput);
+
+        gbcInput.gridx = 1;
+        gbcInput.gridwidth = 1;
+        inputPanel.add(firstNameField, gbcInput);
+
+        gbcInput.gridx = 0;
+        gbcInput.gridy = 1;
+        gbcInput.gridwidth = 1;
+        inputPanel.add(lastNameLabel, gbcInput);
+
+        gbcInput.gridx = 1;
+        gbcInput.gridwidth = 1;
+        inputPanel.add(lastNameField, gbcInput);
+
+        gbcInput.gridx = 0;
+        gbcInput.gridy = 2;
+        gbcInput.gridwidth = 1;
+        inputPanel.add(mobileNumberLabel, gbcInput);
+
+        gbcInput.gridx = 1;
+        gbcInput.gridwidth = 1;
+        inputPanel.add(mobileNumberField, gbcInput);
+
+        // Buttons
+        addButton = new JButton("Add");
+        editButton = new JButton("Edit");
+        deleteButton = new JButton("Delete");
+        saveButton = new JButton("Save");
+        clearButton = new JButton("Clear");
+
+        // Set font style to Font.PLAIN
+        Font buttonFont = new Font(addButton.getFont().getName(), Font.PLAIN, 11);
+        addButton.setFont(buttonFont);
+        editButton.setFont(buttonFont);
+        deleteButton.setFont(buttonFont);
+        saveButton.setFont(buttonFont);
+        clearButton.setFont(buttonFont);
+
+        GridBagConstraints gbcButtons = new GridBagConstraints();
+        gbcButtons.anchor = GridBagConstraints.CENTER;
+        gbcButtons.fill = GridBagConstraints.HORIZONTAL;
+        gbcButtons.gridx = 0;
+        gbcButtons.gridy = 0;
+        gbcButtons.insets = new Insets(5, 5, 5, 5);
+        buttonPanel.add(addButton, gbcButtons);
+        gbcButtons.gridy = 1;
+        buttonPanel.add(editButton, gbcButtons);
+        gbcButtons.gridy = 2;
+        buttonPanel.add(deleteButton, gbcButtons);
+        gbcButtons.gridy = 3;
+        buttonPanel.add(saveButton, gbcButtons);
+        gbcButtons.gridy = 4;
+        buttonPanel.add(clearButton, gbcButtons);
+
+        // Table
+        String[] columnNames = {"First Name", "Last Name", "Mobile Number"};
+        tableModel = new DefaultTableModel(columnNames, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false; // Set all cells as non-editable initially
+            }
+        };
+        dataTable = new JTable(tableModel);
+        dataTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        JScrollPane scrollPane = new JScrollPane(dataTable);
+
+        // Add components to the main frame using grid bag constraints
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.weightx = 1.0;
+        gbc.weighty = 1.0;
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.insets = new Insets(10, 10, 10, 10);
+        add(inputPanel, gbc);
+
+        gbc.gridx = 1;
+        gbc.insets = new Insets(10, 0, 10, 10);
+        add(buttonPanel, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.gridwidth = 2;
+        gbc.insets = new Insets(0, 10, 10, 10);
+        tablePanel.add(scrollPane, BorderLayout.CENTER);
+        add(tablePanel, gbc);
+
+        // Button actions
+        addButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String firstName = firstNameField.getText();
+                String lastName = lastNameField.getText();
+                String mobileNumber = mobileNumberField.getText();
+
+                // Validate the mobile number for digits only
+                if (!isValidMobileNumber(mobileNumber)) {
+                    JOptionPane.showMessageDialog(MobileNumberRegistrationGUI.this,
+                            "Invalid mobile number. Please enter digits only.", "Invalid Input",
+                            JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                // Add the data to the table
+                tableModel.addRow(new Object[]{firstName, lastName, mobileNumber});
+
+                // Clear the input fields
+                clearFields();
+            }
+        });
+
+        editButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int selectedRow = dataTable.getSelectedRow();
+                if (selectedRow != -1) {
+                    // Get the selected data from the table
+                    String firstName = (String) tableModel.getValueAt(selectedRow, 0);
+                    String lastName = (String) tableModel.getValueAt(selectedRow, 1);
+                    String mobileNumber = (String) tableModel.getValueAt(selectedRow, 2);
+
+                    // Set the selected data to the input fields
+                    firstNameField.setText(firstName);
+                    lastNameField.setText(lastName);
+                    mobileNumberField.setText(mobileNumber);
+                }
+            }
+        });
+
+        deleteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int selectedRow = dataTable.getSelectedRow();
+                if (selectedRow != -1) {
+                    // Remove the selected row from the table
+                    tableModel.removeRow(selectedRow);
+                    // Clear the input fields
+                    clearFields();
+                }
+            }
+        });
+
+        saveButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int selectedRow = dataTable.getSelectedRow();
+                if (selectedRow != -1) {
+                    String firstName = firstNameField.getText();
+                    String lastName = lastNameField.getText();
+                    String mobileNumber = mobileNumberField.getText();
+
+                    // Validate the mobile number for digits only
+                    if (!isValidMobileNumber(mobileNumber)) {
+                        JOptionPane.showMessageDialog(MobileNumberRegistrationGUI.this,
+                                "Invalid mobile number. Please enter digits only.", "Invalid Input",
+                                JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+
+                    // Update the selected row with the edited data
+                    tableModel.setValueAt(firstName, selectedRow, 0);
+                    tableModel.setValueAt(lastName, selectedRow, 1);
+                    tableModel.setValueAt(mobileNumber, selectedRow, 2);
+
+                    // Clear the input fields
+                    clearFields();
+                }
+            }
+        });
+
+        clearButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                clearFields();
+            }
+        });
+
+        inputPanel.setPreferredSize(new Dimension(inputPanelWidth, inputPanelHeight));
+        buttonPanel.setPreferredSize(new Dimension(buttonPanelWidth, buttonPanelHeight));
+        tablePanel.setPreferredSize(new Dimension(tablePanelWidth, tablePanelHeight));
+
+        pack();
+        setLocationRelativeTo(null); // Center the frame on the screen
+        setVisible(true);
+    }
+
+    private void clearFields() {
+        firstNameField.setText("");
+        lastNameField.setText("");
+        mobileNumberField.setText("");
+    }
+
+    private boolean isValidMobileNumber(String mobileNumber) {
+        return mobileNumber.matches("\\d+"); // Validate for digits only
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new MobileNumberRegistrationGUI();
+            }
+        });
+    }
+}
