@@ -1,0 +1,30 @@
+#include <iostream>
+
+int main() {
+    int maxWindSpeed;
+
+    // Prompt the user to enter the maximum wind speed
+    std::cout << "Enter the maximum wind speed (in knots): ";
+    std::cin >> maxWindSpeed;
+
+    // Decision to characterize the typhoon based on the maximum wind speed
+    if (maxWindSpeed >= 0 && maxWindSpeed <= 63) {
+        std::cout << "The typhoon is classified as a tropical depression." << std::endl;
+    } else if (maxWindSpeed >= 64 && maxWindSpeed <= 82) {
+        std::cout << "The typhoon is classified as a tropical storm." << std::endl;
+    } else if (maxWindSpeed >= 83 && maxWindSpeed <= 95) {
+        std::cout << "The typhoon is classified as a Category 1 typhoon." << std::endl;
+    } else if (maxWindSpeed >= 96 && maxWindSpeed <= 112) {
+        std::cout << "The typhoon is classified as a Category 2 typhoon." << std::endl;
+    } else if (maxWindSpeed >= 113 && maxWindSpeed <= 136) {
+        std::cout << "The typhoon is classified as a Category 3 typhoon." << std::endl;
+    } else if (maxWindSpeed >= 137 && maxWindSpeed <= 166) {
+        std::cout << "The typhoon is classified as a Category 4 typhoon." << std::endl;
+    } else if (maxWindSpeed >= 167) {
+        std::cout << "The typhoon is classified as a Category 5 typhoon." << std::endl;
+    } else {
+        std::cout << "Invalid input. Please enter a valid maximum wind speed." << std::endl;
+    }
+
+    return 0;
+}
